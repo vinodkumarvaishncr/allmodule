@@ -10,6 +10,19 @@ module "storageacc" {
   storage_account_list =var.storage_account_list
 }
 */
+
+module "kv" {
+  depends_on = [module.rg]
+  source = "../custom/azurerm_keyvault"
+  kvs = var.kvs
+}
+
+module "kv_secret" {
+  depends_on = [module.rg,module.kv]
+  source = "../custom/azurerm_secret"
+  kv_secrets = var.kv_secrets
+}
+
 module "pip" {
   depends_on = [module.rg]
   source = "../custom/azurerm_publicip"
@@ -17,6 +30,18 @@ module "pip" {
 
    
 }
+module "msserver" {
+  depends_on = [module.rg]
+  source = "../custom/azurerm_sqlserver"
+  sql_server_list = var.sql_server_list
+}
+
+module "mssqldatabase" {
+  depends_on = [module.rg,module.msserver]
+  source = "../custom/azurerm_mssqldb"
+  sql_database_list = var.sql_database_list
+}
+
 
 module "vnet" {
   depends_on = [module.rg]
@@ -43,4 +68,3 @@ module "vm" {
   source = "../custom/azurerm_vm"
   vms = var.vms
 }
-

@@ -245,3 +245,68 @@ vms = {
     sku                 = "Standard"
   }
 }
+
+# key vault
+
+kvs = {
+  kv1 = {
+    name                        = "vinodkvaultnew"
+    location                    = "canadacentral"
+    resource_group_name         = "vinod-rg11"
+    enabled_for_disk_encryption = true
+    soft_delete_retention_days  = 30
+    purge_protection_enabled    = true
+    sku_name                    = "standard"
+    tags = {
+      environment = "dev"
+      owner       = "vinod"
+      project     = "terraform-azure"
+    }
+  }
+}
+
+# key vault secret
+
+kv_secrets = {
+  kvs1 = {
+    key_vault_secret_name  = "vm1-username"
+    key_vault_secret_value = "azureuser"
+    key_vault_name         = "vinodkvaultnew"
+    resource_group_name    = "vinod-rg11"
+  }
+
+  kvs2 = {
+    key_vault_secret_name  = "vm1-password"
+    key_vault_secret_value = "Password@@12345"
+    key_vault_name         = "vinodkvaultnew"
+    resource_group_name    = "vinod-rg11"
+  }
+
+ 
+
+  
+}
+
+sql_server_list = {
+  "server1" = {
+    name                         = "vinod-sqlserver"
+    resource_group_name          = "vinod-rg11"
+    location                     = "canadacentral"
+    version                      = "12.0"
+    administrator_login          = "vinodadmin"
+    administrator_login_password = "Password1234!"
+    minimum_tls_version          = "1.2"
+     
+  }
+}
+
+sql_database_list = {
+  "sqldatabase1" = {
+    name         = "vinodmssqldatabase"
+    server_id    = "sql"
+    max_size_gb  = 2
+    sku_name     = "S0"
+    enclave_type = "VBS"
+     
+  }
+}

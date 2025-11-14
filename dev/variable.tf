@@ -160,4 +160,57 @@ variable "pip_info" {
   )) 
 }
 
- 
+variable "kvs" {
+  type = map(object({
+    name                            = string
+    location                        = string
+    resource_group_name             = string
+    sku_name                        = string
+    enabled_for_disk_encryption     = optional(bool) # true
+    soft_delete_retention_days      = optional(number)
+    purge_protection_enabled        = optional(bool)
+    enabled_for_deployment          = optional(bool) # bool optional true
+    enabled_for_template_deployment = optional(bool) # bool optional true
+    rbac_authorization_enabled      = optional(bool) # optional bool false
+    public_network_access_enabled   = optional(bool) # optional bool default true
+    tags                            = optional(map(string))
+
+    network_acls = optional(map(object({
+      bypass                     = string
+      default_action             = string
+      ip_rules                   = optional(string)
+      virtual_network_subnet_ids = optional(list(string))
+
+    })))
+  }))
+}
+ variable "kv_secrets" {
+    type = map(object({
+  key_vault_secret_name         = string
+  key_vault_secret_value        = string
+  key_vault_name = string
+  resource_group_name = string
+    }))
+}
+
+variable "sql_server_list" {
+    type = map(object({
+            name                         = string
+            resource_group_name          = string
+            location                     = string
+            version                      = string
+            administrator_login          = string
+            administrator_login_password = string
+            minimum_tls_version          = string
+    }))
+}
+
+variable "sql_database_list" {
+    type = map(object({
+            name         = string
+            server_id    = string
+            max_size_gb  = string
+            sku_name     = string
+            enclave_type = string
+    }))
+}
