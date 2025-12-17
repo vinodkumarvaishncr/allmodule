@@ -153,7 +153,7 @@ vms = {
             resource_group_name   = "vinod-rg11"
             nic_name              = "vinodnicA" 
             network_interface_ids = ""
-            vm_size               = "Standard_B1ms"
+            vm_size               = "Standard_B2als_v2"
 
             # Uncomment this line to delete the OS disk automatically when deleting the VM
             delete_os_disk_on_termination = true
